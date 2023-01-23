@@ -8,6 +8,6 @@ public class ControleDeGastosApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ControleDeGastosApplication.class, args);
-	}
 
+	}	
 }
