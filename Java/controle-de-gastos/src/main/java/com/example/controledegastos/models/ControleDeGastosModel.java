@@ -21,8 +21,8 @@ public class ControleDeGastosModel implements Serializable {
     private UUID id; 
     @Column(nullable = true, length = 50)
     private String descrição;
-    @Column(nullable = false, length = 10)
-    private int valor;
+    @Column(nullable = false)
+    private double valor;
     @Column(nullable = false, length = 20)
     private Categoria categoria;
     @Column(nullable = false, length = 20)
@@ -45,10 +45,10 @@ public class ControleDeGastosModel implements Serializable {
     public void setDescrição(String descrição) {
         this.descrição = descrição;
     }
-    public int getValor() {
+    public double getValor() {
         return valor;
     }
-    public void setValor(int valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
     public Categoria getCategoria() {
