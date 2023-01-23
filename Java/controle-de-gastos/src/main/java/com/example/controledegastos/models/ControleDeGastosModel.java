@@ -29,6 +29,7 @@ public class ControleDeGastosModel implements Serializable {
     private Situação situação;
     @Column(nullable = false)
     private LocalDate data;
+    
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
