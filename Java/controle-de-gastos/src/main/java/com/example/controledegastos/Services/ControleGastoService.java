@@ -37,5 +37,5 @@ public class ControleGastoService {
     public void delete(ControleDeGastosModel controleDeGastosModel){
         controleGastosRepository.delete(controleDeGastosModel);
     }
-        
+       
 }
