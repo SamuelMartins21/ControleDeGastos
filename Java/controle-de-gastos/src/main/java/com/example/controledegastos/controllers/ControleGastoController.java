@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -68,5 +69,17 @@ public class ControleGastoController {
         controleGastoService.delete(controleDeGastosModeloOptional.get());
         return ResponseEntity.status(HttpStatus.OK).body("Despesa apagada com sucesso.");
     }
-    
+
+    @PutMapping("/{id}") 
+    public ResponseEntity<Object> updateControleGastos(@PathVariable (value = "id")UUID id, @RequestBody @Valid ControleGastosDTO controleGastosDTO){
+        Optional<ControleDeGastosModel> controleDeGastosModeloOptional = controleGastoService.findById(id);
+        if(!controleDeGastosModeloOptional.isPresent()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possivel encontrar essa despesa.");
+        }
+        var controleDeGastosModel = new ControleDeGastosModel();
+        BeanUtils.copyProperties(controleGastosDTO, controleDeGastosModel);
+        controleDeGastosModel.setId(controleDeGastosModeloOptional.get().getId());
+        controleDeGastosModel.setData(controleDeGastosModeloOptional.get().getData());
+        return ResponseEntity.status(HttpStatus.OK).body(controleGastoService.save(controleDeGastosModel));
+    }
 }

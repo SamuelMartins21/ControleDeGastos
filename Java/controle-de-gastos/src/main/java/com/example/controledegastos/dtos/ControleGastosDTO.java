@@ -9,7 +9,6 @@ import jakarta.validation.constraints.Size;
 public class ControleGastosDTO {
     @Size(max=50)
     private String descrição;
-    @NotNull
     private double valor;
     @NotNull
     private Categoria categoria;

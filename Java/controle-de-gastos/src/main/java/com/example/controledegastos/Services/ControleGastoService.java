@@ -33,6 +33,7 @@ public class ControleGastoService {
 
     }
 
+    @Transactional
     public void delete(ControleDeGastosModel controleDeGastosModel){
         controleGastosRepository.delete(controleDeGastosModel);
     }
