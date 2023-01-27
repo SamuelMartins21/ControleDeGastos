@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -76,5 +75,12 @@ public class ControleGastoController {
         controleDeGastosModel.setId(controleDeGastosModeloOptional.get().getId());
         controleDeGastosModel.setData(controleDeGastosModeloOptional.get().getData());
         return ResponseEntity.status(HttpStatus.OK).body(controleGastoService.save(controleDeGastosModel));
+    }
+
+    @DeleteMapping("/deleteAll")
+    public ResponseEntity<Object> deleteAllGastos(){
+        List<ControleDeGastosModel> controleDeGastosModelsList = controleGastoService.findAll();
+        controleGastoService.deleteAll(controleDeGastosModelsList);
+        return ResponseEntity.status(HttpStatus.OK).body("Todas as despesas Apagadas");
     }
 }

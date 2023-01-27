@@ -37,5 +37,10 @@ public class ControleGastoService {
     public void delete(ControleDeGastosModel controleDeGastosModel){
         controleGastosRepository.delete(controleDeGastosModel);
     }
-       
+
+    @Transactional
+    public void deleteAll(List<ControleDeGastosModel> controleDeGastosModelsList){
+        controleGastosRepository.deleteAll();
+    }   
+    
 }
