@@ -77,5 +77,4 @@ public class ControleGastoController {
         controleDeGastosModel.setData(controleDeGastosModeloOptional.get().getData());
         return ResponseEntity.status(HttpStatus.OK).body(controleGastoService.save(controleDeGastosModel));
     }
-
 }
