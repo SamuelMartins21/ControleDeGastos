@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,9 @@ import com.example.controledegastos.dtos.ControleGastosDTO;
 import com.example.controledegastos.models.ControleDeGastosModel;
 
 import jakarta.validation.Valid;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @CrossOrigin (origins = "*", maxAge = 3600)
@@ -42,7 +46,17 @@ public class ControleGastoController {
 
     @GetMapping("/getallcontroledegastos")
     public ResponseEntity <List<ControleDeGastosModel>> getAllControleGastos(){
-        return ResponseEntity.status(HttpStatus.OK).body(controleGastoService.findAll());
+        List<ControleDeGastosModel> controleDeGastosModelsList = controleGastoService.findAll();
+        if(controleDeGastosModelsList.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else{
+            for (ControleDeGastosModel gastosModel : controleDeGastosModelsList){
+                UUID id = gastosModel.getId();
+                gastosModel.add(linkTo(methodOn(ControleGastoController.class).getOneGasto(id)).withSelfRel());
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(controleDeGastosModelsList);
+        }
+
     }
 
     @GetMapping("/ControleDeGasto/{id}")
@@ -51,6 +65,7 @@ public class ControleGastoController {
         if(!controleDeGastosModelOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possivel encontrar essa despesa.");
         }
+        controleDeGastosModelOptional.get().add(linkTo(methodOn(ControleGastoController.class).getAllControleGastos()).withRel("Lista de produtos:"));
         return ResponseEntity.status(HttpStatus.OK).body(controleDeGastosModelOptional.get());
     }
 
@@ -80,6 +95,9 @@ public class ControleGastoController {
     @DeleteMapping("/deleteAll")
     public ResponseEntity<Object> deleteAllGastos(){
         List<ControleDeGastosModel> controleDeGastosModelsList = controleGastoService.findAll();
+        if(controleDeGastosModelsList.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possível encontrar despesas.");
+        }
         controleGastoService.deleteAll(controleDeGastosModelsList);
         return ResponseEntity.status(HttpStatus.OK).body("Todas as despesas Apagadas");
     }
