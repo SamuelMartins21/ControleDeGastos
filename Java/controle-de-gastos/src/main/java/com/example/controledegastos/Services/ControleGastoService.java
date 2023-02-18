@@ -42,5 +42,4 @@ public class ControleGastoService {
     public void deleteAll(List<ControleDeGastosModel> controleDeGastosModelsList){
         controleGastosRepository.deleteAll();
     }   
-    
 }
