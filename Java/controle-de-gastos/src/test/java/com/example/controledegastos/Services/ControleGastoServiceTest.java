@@ -1,45 +1,37 @@
 package com.example.controledegastos.Services;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import com.example.controledegastos.models.Categoria;
 import com.example.controledegastos.models.ControleDeGastosModel;
 import com.example.controledegastos.models.Situação;
-import com.example.controledegastos.repositories.ControleGastosRepository;
+import com.example.controledegastos.repositories.ControleGastosRepositoryTest;
 
 public class ControleGastoServiceTest {
-    private ControleGastoService service;
-    private ControleGastosRepository repository;
+    
+    private ControleGastosRepositoryTest controleGastosRepository;
+    private ControleGastoService controleGastoService;
+    private ControleDeGastosModel controleGastosModel;
 
     @BeforeEach
     public void setUp(){
-        service = new ControleGastoService(repository);
-    }
+        controleGastosRepository = new ControleGastosRepositoryTest();
+        controleGastoService = new ControleGastoService(controleGastosRepository);
+        controleGastosModel = new ControleDeGastosModel();
 
-    @Test
-    void testDelete_ReturnTrue_QuandoDespesaForEncontrada() {
-       ControleDeGastosModel model = new ControleDeGastosModel();
-       model.setDescrição("Despesa preenchida");
-       model.setCategoria(Categoria.Alimentação);
-       model.setValor(20);
-       model.setSituação(Situação.PAGA);
-       
     }
     
     @Test
-    void testDelete_ReturnTrue_QuandoDespesaNaoForEncontrada() {
-       
-    }
+    void testDelete() {
 
-    @Test
-    void testDelete_ReturnFalse_QuandoDespesaForNula() {
-       
     }
 
     @Test
     void testDeleteAll() {
-
     }
 
     @Test
@@ -53,7 +45,28 @@ public class ControleGastoServiceTest {
     }
 
     @Test
-    void testSave() {
+    void testSave_Returntrue_WhenDespesaToSave() {
+        
+        controleGastosModel.setDescrição("Teste 1");
+        controleGastosModel.setValor(20);
+        controleGastosModel.setSituação(Situação.PAGA);
+        controleGastosModel.setCategoria(Categoria.Alimentação);
+
+        ControleDeGastosModel controleDeGastosModelSave = controleGastoService.save(controleGastosModel);
+
+        assertNotNull(controleDeGastosModelSave.getId());
 
     }
+
+    @Test
+    void testSave_ReturnFalse_WhenFieldIsNull(){
+        controleGastosModel.setDescrição("Teste 1");
+        controleGastosModel.setSituação(Situação.PAGA);
+        controleGastosModel.setCategoria(Categoria.Alimentação);
+        
+        ControleDeGastosModel controleDeGastosModelSaveNull = controleGastoService.save(controleGastosModel);
+
+        assertTrue(controleDeGastosModelSaveNull.getValor() == 0);
+    }
+
 }

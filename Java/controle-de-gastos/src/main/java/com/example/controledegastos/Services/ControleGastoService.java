@@ -7,16 +7,16 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.example.controledegastos.models.ControleDeGastosModel;
-import com.example.controledegastos.repositories.ControleGastosRepository;
+import com.example.controledegastos.repositories.IControleGastosRepository;
 
 import jakarta.transaction.Transactional;
 
 @Service
 public class ControleGastoService {
     
-    final ControleGastosRepository controleGastosRepository;
+    final IControleGastosRepository controleGastosRepository;
 
-    public ControleGastoService(ControleGastosRepository controleGastosRepository){
+    public ControleGastoService(IControleGastosRepository controleGastosRepository){
         this.controleGastosRepository = controleGastosRepository;
     }
 
@@ -24,6 +24,7 @@ public class ControleGastoService {
     public ControleDeGastosModel save(ControleDeGastosModel controleDeGastosModel){
         return controleGastosRepository.save(controleDeGastosModel);
     }
+    
     public List<ControleDeGastosModel> findAll(){
         return controleGastosRepository.findAll();
     }
@@ -40,7 +41,7 @@ public class ControleGastoService {
 
     @Transactional
     public void deleteAll(List<ControleDeGastosModel> controleDeGastosModelsList){
-        controleGastosRepository.deleteAll();
+        controleGastosRepository.deleteAll(controleDeGastosModelsList);
     }   
     
 }
