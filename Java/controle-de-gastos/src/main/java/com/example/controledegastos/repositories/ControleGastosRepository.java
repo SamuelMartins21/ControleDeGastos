@@ -28,20 +28,17 @@ public class ControleGastosRepository implements IControleGastosRepository{
 
     @Override
     public Optional<ControleDeGastosModel> findById(UUID id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        return controleGastosRepositoryJPA.findById(id);
     }
 
     @Override
     public void delete(ControleDeGastosModel controleDeGastosModel) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        controleGastosRepositoryJPA.delete(controleDeGastosModel);
     }
 
     @Override
     public void deleteAll(List<ControleDeGastosModel> controleDeGastosModelsList) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteAll'");
+        controleGastosRepositoryJPA.deleteAll(controleDeGastosModelsList);
     }
     
 }
