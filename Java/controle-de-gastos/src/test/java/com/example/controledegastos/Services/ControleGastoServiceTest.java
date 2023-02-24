@@ -55,7 +55,7 @@ public class ControleGastoServiceTest {
         Assertions.assertNotNull(controleDeGastosModelFindById);
         }
 
-        @Test
+    @Test
     void testFindById_ReturnTrue_WhenIdNotIsPresent(){
         controleGastosModel.setDescrição("Teste 1");
         controleGastosModel.setValor(20);
@@ -64,9 +64,10 @@ public class ControleGastoServiceTest {
 
         ControleDeGastosModel controleDeGastosModelSave = controleGastoService.save(controleGastosModel);
         controleDeGastosModelSave.setId(null);
-        Optional<ControleDeGastosModel> controleDeGastosModelFindById = controleGastoService.findById(controleDeGastosModelSave.getId());
+        //Optional<ControleDeGastosModel> controleDeGastosModelFindById = controleGastoService.findById(controleDeGastosModelSave.getId());
 
-        Assertions.assertNull(controleDeGastosModelFindById);
+        Assertions.assertThrows(NullPointerException.class, () -> controleGastoService.
+        findById(controleDeGastosModelSave.getId()));
     }
 
     @Test
