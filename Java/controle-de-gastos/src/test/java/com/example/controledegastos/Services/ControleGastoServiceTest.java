@@ -1,8 +1,10 @@
 package com.example.controledegastos.Services;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.example.controledegastos.models.Categoria;
@@ -27,6 +29,7 @@ public class ControleGastoServiceTest {
     @Test
     void testDelete() {
 
+
     }
 
     @Test
@@ -39,8 +42,31 @@ public class ControleGastoServiceTest {
     }
 
     @Test
-    void testFindById() {
+    void testFindById_ReturnTrue_WhenIdIsPresent() {
+        
+        controleGastosModel.setDescrição("Teste 1");
+        controleGastosModel.setValor(20);
+        controleGastosModel.setSituação(Situação.PAGA);
+        controleGastosModel.setCategoria(Categoria.Alimentação);
 
+        ControleDeGastosModel controleDeGastosModelSave = controleGastoService.save(controleGastosModel);
+        Optional<ControleDeGastosModel> controleDeGastosModelFindById = controleGastoService.findById(controleDeGastosModelSave.getId());
+
+        Assertions.assertNotNull(controleDeGastosModelFindById);
+        }
+
+        @Test
+    void testFindById_ReturnTrue_WhenIdNotIsPresent(){
+        controleGastosModel.setDescrição("Teste 1");
+        controleGastosModel.setValor(20);
+        controleGastosModel.setSituação(Situação.PAGA);
+        controleGastosModel.setCategoria(Categoria.Alimentação);
+
+        ControleDeGastosModel controleDeGastosModelSave = controleGastoService.save(controleGastosModel);
+        controleDeGastosModelSave.setId(null);
+        Optional<ControleDeGastosModel> controleDeGastosModelFindById = controleGastoService.findById(controleDeGastosModelSave.getId());
+
+        Assertions.assertNull(controleDeGastosModelFindById);
     }
 
     @Test
@@ -53,19 +79,20 @@ public class ControleGastoServiceTest {
 
         ControleDeGastosModel controleDeGastosModelSave = controleGastoService.save(controleGastosModel);
 
-        assertNotNull(controleDeGastosModelSave.getId());
+        Assertions.assertNotNull(controleDeGastosModelSave.getId());
 
     }
 
     @Test
-    void testSave_ReturnFalse_WhenFieldIsNull(){
-        controleGastosModel.setDescrição("Teste 1");
+    void testSave_ReturnNull_WhenFieldIsNull(){
+        controleGastosModel.setDescrição("teste");
+        controleGastosModel.setValor(20);
         controleGastosModel.setSituação(Situação.PAGA);
-        controleGastosModel.setCategoria(Categoria.Alimentação);
         
         ControleDeGastosModel controleDeGastosModelSaveNull = controleGastoService.save(controleGastosModel);
 
-        assertTrue(controleDeGastosModelSaveNull.getValor() == 0);
+        Assertions.assertEquals(null, controleDeGastosModelSaveNull.getCategoria());
+
     }
 
 }

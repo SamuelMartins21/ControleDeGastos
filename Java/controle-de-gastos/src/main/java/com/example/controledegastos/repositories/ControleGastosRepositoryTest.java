@@ -31,7 +31,10 @@ public class ControleGastosRepositoryTest implements IControleGastosRepository {
 
     @Override
     public Optional<ControleDeGastosModel> findById(UUID id) {
-        return null;
+        return this.listControleDeGastosModel.stream()
+        .filter(listControleDeGastosModel -> listControleDeGastosModel.getId()
+        .equals(id)).findFirst();
+    
     }
 
     @Override

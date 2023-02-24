@@ -71,6 +71,12 @@ public class ControleDeGastosModel extends RepresentationModel<ControleDeGastosM
     public void setData(LocalDate data) {
         this.data = data;
     }
+   
+    @Override
+    public String toString() {
+        return "ControleDeGastosModel [id=" + id + ", descrição=" + descrição + ", valor=" + valor + ", categoria="
+                + categoria + ", situação=" + situação + ", data=" + data + "]";
+    }
     
     
 
