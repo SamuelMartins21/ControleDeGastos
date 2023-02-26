@@ -39,12 +39,12 @@ public class ControleGastosRepositoryTest implements IControleGastosRepository {
 
     @Override
     public void delete(ControleDeGastosModel controleDeGastosModel) {
-       System.out.println();
+        this.listControleDeGastosModel.remove(controleDeGastosModel);
     }
 
     @Override
     public void deleteAll(List<ControleDeGastosModel> controleDeGastosModelsList) {
-        System.out.println();
+        this.listControleDeGastosModel.removeAll(controleDeGastosModelsList);
     }
     
 }
