@@ -1,5 +1,6 @@
 package com.example.controledegastos.repositories;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,7 @@ public class ControleGastosRepositoryTest implements IControleGastosRepository {
     public ControleDeGastosModel save(ControleDeGastosModel controleDeGastosModel) {
         this.listControleDeGastosModel.add(controleDeGastosModel);
         controleDeGastosModel.setId(UUID.randomUUID());
+        controleDeGastosModel.setData(LocalDate.now());
         return controleDeGastosModel;
     }
 

@@ -26,8 +26,16 @@ public class ControleGastoServiceTest {
     }
     
     @Test
-    void testDelete() {
-        
+    void testDelete_ReturnTrue_WhenDespesaIsExcluded() {
+        controleGastosModel.setDescrição("Teste 1");
+        controleGastosModel.setValor(20);
+        controleGastosModel.setSituação(Situação.PAGA);
+        controleGastosModel.setCategoria(Categoria.Alimentação);
+
+        ControleDeGastosModel controleDeGastosModelSave = controleGastoService.save(controleGastosModel);
+        controleGastoService.delete(controleDeGastosModelSave);
+
+        Assertions.assertEquals(null, controleDeGastosModelSave);
 
     }
 
