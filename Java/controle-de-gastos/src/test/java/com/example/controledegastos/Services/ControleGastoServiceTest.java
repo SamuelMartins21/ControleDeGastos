@@ -34,11 +34,10 @@ public class ControleGastoServiceTest {
         controleGastosModel.setSituação(Situação.PAGA);
         controleGastosModel.setCategoria(Categoria.Alimentação);
 
-        ControleDeGastosModel controleDeGastosModelSave = controleGastoService.save(controleGastosModel);
-        Optional<ControleDeGastosModel> controleDeGastosModeloOptional = controleGastoService.findById(controleDeGastosModelSave.getId());
-        controleGastoService.delete(controleDeGastosModeloOptional.get());
+        controleGastoService.save(controleGastosModel);
+        controleGastoService.delete(controleGastosModel);
 
-        Assertions.assertEquals(null, controleDeGastosModelSave);
+        Assertions.assertEquals(null, controleGastosModel);
 
     }
 

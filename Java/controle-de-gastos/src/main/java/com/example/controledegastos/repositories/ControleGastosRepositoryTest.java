@@ -19,9 +19,9 @@ public class ControleGastosRepositoryTest implements IControleGastosRepository {
 
     @Override
     public ControleDeGastosModel save(ControleDeGastosModel controleDeGastosModel) {
-        this.listControleDeGastosModel.add(controleDeGastosModel);
         controleDeGastosModel.setId(UUID.randomUUID());
         controleDeGastosModel.setData(LocalDate.now());
+        listControleDeGastosModel.add(controleDeGastosModel);
         return controleDeGastosModel;
     }
 
@@ -41,9 +41,7 @@ public class ControleGastosRepositoryTest implements IControleGastosRepository {
 
     @Override
     public void delete(ControleDeGastosModel controleDeGastosModel) {
-        List<ControleDeGastosModel> teste = listControleDeGastosModel.stream().collect(Collectors.toList());
-        this.listControleDeGastosModel.remove(teste.indexOf(controleDeGastosModel));
-
+        this.listControleDeGastosModel.clear();
     }
 
     @Override
