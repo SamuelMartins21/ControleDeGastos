@@ -1,5 +1,6 @@
 package com.example.controledegastos.Services;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -27,13 +28,15 @@ public class ControleGastoServiceTest {
     
     @Test
     void testDelete_ReturnTrue_WhenDespesaIsExcluded() {
+        
         controleGastosModel.setDescrição("Teste 1");
         controleGastosModel.setValor(20);
         controleGastosModel.setSituação(Situação.PAGA);
         controleGastosModel.setCategoria(Categoria.Alimentação);
 
         ControleDeGastosModel controleDeGastosModelSave = controleGastoService.save(controleGastosModel);
-        controleGastoService.delete(controleDeGastosModelSave);
+        Optional<ControleDeGastosModel> controleDeGastosModeloOptional = controleGastoService.findById(controleDeGastosModelSave.getId());
+        controleGastoService.delete(controleDeGastosModeloOptional.get());
 
         Assertions.assertEquals(null, controleDeGastosModelSave);
 
@@ -44,7 +47,17 @@ public class ControleGastoServiceTest {
     }
 
     @Test
-    void testFindAll() {
+    void testFindAll_ReturnTrue_WhenDespesaIsPresent() {
+        
+        controleGastosModel.setDescrição("Teste 1");
+        controleGastosModel.setValor(20);
+        controleGastosModel.setSituação(Situação.PAGA);
+        controleGastosModel.setCategoria(Categoria.Alimentação);
+
+        ControleDeGastosModel controleDeGastosModelSave = controleGastoService.save(controleGastosModel);
+        List<ControleDeGastosModel> controleDeGastosModelIsPresent = controleGastoService.findAll();
+        
+        Assertions.assertTrue(controleDeGastosModelIsPresent.contains(controleDeGastosModelSave));
 
     }
 
