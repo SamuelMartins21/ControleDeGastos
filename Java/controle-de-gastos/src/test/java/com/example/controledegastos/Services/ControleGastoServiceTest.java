@@ -36,14 +36,24 @@ public class ControleGastoServiceTest {
 
         controleGastoService.save(controleGastosModel);
         controleGastoService.delete(controleGastosModel);
-        List<ControleDeGastosModel> controleDeGastosModelIsPresent = controleGastoService.findAll();
+        Optional<ControleDeGastosModel> controleDeGastosModelOptional = controleGastoService.findById(controleGastosModel.getId());
 
-        Assertions.assertTrue(controleDeGastosModelIsPresent.isEmpty());
+        Assertions.assertTrue(controleDeGastosModelOptional.isEmpty());
         
     }
 
     @Test
-    void testDeleteAll() {
+    void testDeleteAll_ReturnTrue_WhenDespesaAllIsExcluded() {
+        controleGastosModel.setDescrição("Teste 1");
+        controleGastosModel.setValor(20);
+        controleGastosModel.setSituação(Situação.PAGA);
+        controleGastosModel.setCategoria(Categoria.Alimentação);
+
+        controleGastoService.save(controleGastosModel);
+        List<ControleDeGastosModel> controleDeGastosModelList = controleGastoService.findAll();
+        controleGastoService.deleteAll(controleDeGastosModelList);
+
+        Assertions.assertTrue(controleDeGastosModelList.isEmpty());
     }
 
     @Test
@@ -54,12 +64,30 @@ public class ControleGastoServiceTest {
         controleGastosModel.setSituação(Situação.PAGA);
         controleGastosModel.setCategoria(Categoria.Alimentação);
 
-        ControleDeGastosModel controleDeGastosModelSave = controleGastoService.save(controleGastosModel);
+        controleGastoService.save(controleGastosModel);
         List<ControleDeGastosModel> controleDeGastosModelIsPresent = controleGastoService.findAll();
         
-        Assertions.assertTrue(controleDeGastosModelIsPresent.contains(controleDeGastosModelSave));
+        Assertions.assertTrue(controleDeGastosModelIsPresent.contains(controleGastosModel));
 
     }
+
+    @Test
+    void testFindAll_ReturnFalse_WhenDespesaIsNoPresent() {
+        
+        controleGastosModel.setDescrição("Teste 1");
+        controleGastosModel.setValor(20);
+        controleGastosModel.setSituação(Situação.PAGA);
+        controleGastosModel.setCategoria(Categoria.Alimentação);
+
+        controleGastoService.save(controleGastosModel);
+        controleGastoService.delete(controleGastosModel);
+        List<ControleDeGastosModel> controleDeGastosModelIsNoPresent = controleGastoService.findAll();
+        
+        
+        Assertions.assertFalse(controleDeGastosModelIsNoPresent.contains(controleGastosModel));
+
+    }
+
 
     @Test
     void testFindById_ReturnTrue_WhenIdIsPresent() {
@@ -69,8 +97,9 @@ public class ControleGastoServiceTest {
         controleGastosModel.setSituação(Situação.PAGA);
         controleGastosModel.setCategoria(Categoria.Alimentação);
 
-        ControleDeGastosModel controleDeGastosModelSave = controleGastoService.save(controleGastosModel);
-        Optional<ControleDeGastosModel> controleDeGastosModelIdIsPresent = controleGastoService.findById(controleDeGastosModelSave.getId());
+        controleGastoService.save(controleGastosModel);
+        Optional<ControleDeGastosModel> controleDeGastosModelIdIsPresent = controleGastoService
+        .findById(controleGastosModel.getId());
 
         Assertions.assertTrue(controleDeGastosModelIdIsPresent.isPresent());
 
@@ -84,11 +113,11 @@ public class ControleGastoServiceTest {
         controleGastosModel.setSituação(Situação.PAGA);
         controleGastosModel.setCategoria(Categoria.Alimentação);
 
-        ControleDeGastosModel controleDeGastosModelSave = controleGastoService.save(controleGastosModel);
-        controleDeGastosModelSave.setId(null);
+        controleGastoService.save(controleGastosModel);
+        controleGastosModel.setId(null);
 
         Assertions.assertThrows(NullPointerException.class, () -> controleGastoService.
-        findById(controleDeGastosModelSave.getId()));
+        findById(controleGastosModel.getId()));
 
     }
 
@@ -100,7 +129,7 @@ public class ControleGastoServiceTest {
         controleGastosModel.setSituação(Situação.PAGA);
         controleGastosModel.setCategoria(Categoria.Alimentação);
 
-        ControleDeGastosModel controleDeGastosModelSave = controleGastoService.save(controleGastosModel);
+        controleGastoService.save(controleGastosModel);
 
         Optional<ControleDeGastosModel> controleDeGastosModelOptional = controleGastoService.findById(UUID.randomUUID());
         Assertions.assertFalse(controleDeGastosModelOptional.isPresent());
@@ -115,9 +144,9 @@ public class ControleGastoServiceTest {
         controleGastosModel.setSituação(Situação.PAGA);
         controleGastosModel.setCategoria(Categoria.Alimentação);
 
-        ControleDeGastosModel controleDeGastosModelSave = controleGastoService.save(controleGastosModel);
+        controleGastoService.save(controleGastosModel);
 
-        Assertions.assertNotNull(controleDeGastosModelSave.getId());
+        Assertions.assertNotNull(controleGastosModel.getId());
 
     }
 
@@ -127,9 +156,9 @@ public class ControleGastoServiceTest {
         controleGastosModel.setValor(20);
         controleGastosModel.setSituação(Situação.PAGA);
         
-        ControleDeGastosModel controleDeGastosModelSaveNull = controleGastoService.save(controleGastosModel);
+        controleGastoService.save(controleGastosModel);
 
-        Assertions.assertEquals(null, controleDeGastosModelSaveNull.getCategoria());
+        Assertions.assertEquals(null, controleGastosModel.getCategoria());
 
     }
 
