@@ -36,9 +36,10 @@ public class ControleGastoServiceTest {
 
         controleGastoService.save(controleGastosModel);
         controleGastoService.delete(controleGastosModel);
+        List<ControleDeGastosModel> controleDeGastosModelIsPresent = controleGastoService.findAll();
 
-        Assertions.assertEquals(null, controleGastosModel);
-
+        Assertions.assertTrue(controleDeGastosModelIsPresent.isEmpty());
+        
     }
 
     @Test
