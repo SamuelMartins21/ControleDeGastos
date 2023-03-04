@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.controledegastos.Services.ControleGastoService;
 import com.example.controledegastos.dtos.ControleGastosDTO;
 import com.example.controledegastos.models.ControleDeGastosModel;
-import com.example.controledegastos.repositories.ControleGastosRepository;
+import com.example.controledegastos.repositories.ControleGastosRepositoryJPA;
 
 import jakarta.validation.Valid;
 
@@ -31,8 +31,8 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @CrossOrigin (origins = "*", maxAge = 3600)
 public class ControleGastoController {
     
-    final ControleGastosRepository controleGastosRepository;
-    public ControleGastoController (ControleGastosRepository controleGastosRepository){
+    final ControleGastosRepositoryJPA controleGastosRepository;
+    public ControleGastoController (ControleGastosRepositoryJPA controleGastosRepository){
         this.controleGastosRepository = controleGastosRepository;
     }
 
