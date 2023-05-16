@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.example.controledegastos.models.Categoria;
 import com.example.controledegastos.models.ControleDeGastosModel;
-import com.example.controledegastos.models.Situação;
+import com.example.controledegastos.models.Status;
 import com.example.controledegastos.repositories.ControleGastosRepositoryTest;
 
 public class ControleGastoServiceTest {
@@ -31,7 +31,7 @@ public class ControleGastoServiceTest {
         
         controleGastosModel.setDescrição("Teste 1");
         controleGastosModel.setValor(20);
-        controleGastosModel.setSituação(Situação.PAGA);
+        controleGastosModel.setStatus(Status.PAGA);
         controleGastosModel.setCategoria(Categoria.Alimentação);
 
         controleGastoService.save(controleGastosModel);
@@ -46,7 +46,7 @@ public class ControleGastoServiceTest {
     void testDeleteAll_ReturnTrue_WhenDespesaAllIsExcluded() {
         controleGastosModel.setDescrição("Teste 1");
         controleGastosModel.setValor(20);
-        controleGastosModel.setSituação(Situação.PAGA);
+        controleGastosModel.setStatus(Status.PAGA);
         controleGastosModel.setCategoria(Categoria.Alimentação);
 
         controleGastoService.save(controleGastosModel);
@@ -61,7 +61,7 @@ public class ControleGastoServiceTest {
         
         controleGastosModel.setDescrição("Teste 1");
         controleGastosModel.setValor(20);
-        controleGastosModel.setSituação(Situação.PAGA);
+        controleGastosModel.setStatus(Status.PAGA);
         controleGastosModel.setCategoria(Categoria.Alimentação);
 
         controleGastoService.save(controleGastosModel);
@@ -76,7 +76,7 @@ public class ControleGastoServiceTest {
         
         controleGastosModel.setDescrição("Teste 1");
         controleGastosModel.setValor(20);
-        controleGastosModel.setSituação(Situação.PAGA);
+        controleGastosModel.setStatus(Status.PAGA);
         controleGastosModel.setCategoria(Categoria.Alimentação);
 
         controleGastoService.save(controleGastosModel);
@@ -94,7 +94,7 @@ public class ControleGastoServiceTest {
         
         controleGastosModel.setDescrição("Teste 1");
         controleGastosModel.setValor(20);
-        controleGastosModel.setSituação(Situação.PAGA);
+        controleGastosModel.setStatus(Status.PAGA);
         controleGastosModel.setCategoria(Categoria.Alimentação);
 
         controleGastoService.save(controleGastosModel);
@@ -110,7 +110,7 @@ public class ControleGastoServiceTest {
         
         controleGastosModel.setDescrição("Teste 1");
         controleGastosModel.setValor(20);
-        controleGastosModel.setSituação(Situação.PAGA);
+        controleGastosModel.setStatus(Status.PAGA);
         controleGastosModel.setCategoria(Categoria.Alimentação);
 
         controleGastoService.save(controleGastosModel);
@@ -126,7 +126,7 @@ public class ControleGastoServiceTest {
         
         controleGastosModel.setDescrição("Teste 1");
         controleGastosModel.setValor(20);
-        controleGastosModel.setSituação(Situação.PAGA);
+        controleGastosModel.setStatus(Status.PAGA);
         controleGastosModel.setCategoria(Categoria.Alimentação);
 
         controleGastoService.save(controleGastosModel);
@@ -141,7 +141,7 @@ public class ControleGastoServiceTest {
         
         controleGastosModel.setDescrição("Teste 1");
         controleGastosModel.setValor(20);
-        controleGastosModel.setSituação(Situação.PAGA);
+        controleGastosModel.setStatus(Status.PAGA);
         controleGastosModel.setCategoria(Categoria.Alimentação);
 
         controleGastoService.save(controleGastosModel);
@@ -154,7 +154,7 @@ public class ControleGastoServiceTest {
     void testSave_ReturnNull_WhenFieldIsNull(){
         controleGastosModel.setDescrição("teste");
         controleGastosModel.setValor(20);
-        controleGastosModel.setSituação(Situação.PAGA);
+        controleGastosModel.setStatus(Status.PAGA);
         
         controleGastoService.save(controleGastosModel);
 

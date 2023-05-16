@@ -1,6 +1,6 @@
 package com.example.controledegastos.models;
 
-public enum Situação {
+public enum Status {
     PENDENTE,
     PAGA;
 }

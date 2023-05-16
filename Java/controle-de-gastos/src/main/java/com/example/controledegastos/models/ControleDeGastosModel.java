@@ -28,7 +28,7 @@ public class ControleDeGastosModel extends RepresentationModel<ControleDeGastosM
     @Column(nullable = false, length = 20)
     private Categoria categoria;
     @Column(nullable = false, length = 20)
-    private Situação situação;
+    private Status status;
     @Column(nullable = false)
     private LocalDate data;
     
@@ -59,11 +59,11 @@ public class ControleDeGastosModel extends RepresentationModel<ControleDeGastosM
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
-    public Situação getSituação() {
-        return situação;
+    public Status getStatus() {
+        return status;
     }
-    public void setSituação(Situação situação) {
-        this.situação = situação;
+    public void setStatus(Status status) {
+        this.status = status;
     }
     public LocalDate getData() {
         return data;
@@ -75,7 +75,7 @@ public class ControleDeGastosModel extends RepresentationModel<ControleDeGastosM
     @Override
     public String toString() {
         return "ControleDeGastosModel [id=" + id + ", descrição=" + descrição + ", valor=" + valor + ", categoria="
-                + categoria + ", situação=" + situação + ", data=" + data + "]";
+                + categoria + ", situação=" + status + ", data=" + data + "]";
     }
     
     

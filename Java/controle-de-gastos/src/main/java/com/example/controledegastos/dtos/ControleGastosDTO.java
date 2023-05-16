@@ -1,7 +1,7 @@
 package com.example.controledegastos.dtos;
 
 import com.example.controledegastos.models.Categoria;
-import com.example.controledegastos.models.Situação;
+import com.example.controledegastos.models.Status;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -13,7 +13,7 @@ public class ControleGastosDTO {
     @NotNull
     private Categoria categoria;
     @NotNull
-    private Situação situação;
+    private Status status;
     
     public String getDescrição() {
         return descrição;
@@ -33,11 +33,11 @@ public class ControleGastosDTO {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
-    public Situação getSituação() {
-        return situação;
+    public Status getStatus() {
+        return status;
     }
-    public void setSituação(Situação situação) {
-        this.situação = situação;
+    public void setStatus(Status status) {
+        this.status = status;
     }
     
 
