@@ -24,15 +24,15 @@ public class ControleGastoServiceTest {
         controleGastoService = new ControleGastoService(controleGastosRepository);
         controleGastosModel = new ControleDeGastosModel();
 
-    }
-    
-    @Test
-    void testDelete_ReturnTrue_WhenDespesaIsExcluded() {
-        
         controleGastosModel.setDescrição("Teste 1");
         controleGastosModel.setValor(20);
         controleGastosModel.setStatus(Status.PAGA);
         controleGastosModel.setCategoria(Categoria.Alimentação);
+
+    }
+    
+    @Test
+    void testDelete_ReturnTrue_WhenDespesaIsExcluded() {
 
         controleGastoService.save(controleGastosModel);
         controleGastoService.delete(controleGastosModel);
@@ -44,10 +44,6 @@ public class ControleGastoServiceTest {
 
     @Test
     void testDeleteAll_ReturnTrue_WhenDespesaAllIsExcluded() {
-        controleGastosModel.setDescrição("Teste 1");
-        controleGastosModel.setValor(20);
-        controleGastosModel.setStatus(Status.PAGA);
-        controleGastosModel.setCategoria(Categoria.Alimentação);
 
         controleGastoService.save(controleGastosModel);
         List<ControleDeGastosModel> controleDeGastosModelList = controleGastoService.findAll();
@@ -58,11 +54,6 @@ public class ControleGastoServiceTest {
 
     @Test
     void testFindAll_ReturnTrue_WhenDespesaIsPresent() {
-        
-        controleGastosModel.setDescrição("Teste 1");
-        controleGastosModel.setValor(20);
-        controleGastosModel.setStatus(Status.PAGA);
-        controleGastosModel.setCategoria(Categoria.Alimentação);
 
         controleGastoService.save(controleGastosModel);
         List<ControleDeGastosModel> controleDeGastosModelIsPresent = controleGastoService.findAll();
@@ -73,16 +64,10 @@ public class ControleGastoServiceTest {
 
     @Test
     void testFindAll_ReturnFalse_WhenDespesaIsNoPresent() {
-        
-        controleGastosModel.setDescrição("Teste 1");
-        controleGastosModel.setValor(20);
-        controleGastosModel.setStatus(Status.PAGA);
-        controleGastosModel.setCategoria(Categoria.Alimentação);
 
         controleGastoService.save(controleGastosModel);
         controleGastoService.delete(controleGastosModel);
         List<ControleDeGastosModel> controleDeGastosModelIsNoPresent = controleGastoService.findAll();
-        
         
         Assertions.assertFalse(controleDeGastosModelIsNoPresent.contains(controleGastosModel));
 
@@ -91,11 +76,6 @@ public class ControleGastoServiceTest {
 
     @Test
     void testFindById_ReturnTrue_WhenIdIsPresent() {
-        
-        controleGastosModel.setDescrição("Teste 1");
-        controleGastosModel.setValor(20);
-        controleGastosModel.setStatus(Status.PAGA);
-        controleGastosModel.setCategoria(Categoria.Alimentação);
 
         controleGastoService.save(controleGastosModel);
         Optional<ControleDeGastosModel> controleDeGastosModelIdIsPresent = controleGastoService
@@ -107,11 +87,6 @@ public class ControleGastoServiceTest {
 
     @Test
     void testFindById_ReturnNullPointerException_WhenIdIsNull(){
-        
-        controleGastosModel.setDescrição("Teste 1");
-        controleGastosModel.setValor(20);
-        controleGastosModel.setStatus(Status.PAGA);
-        controleGastosModel.setCategoria(Categoria.Alimentação);
 
         controleGastoService.save(controleGastosModel);
         controleGastosModel.setId(null);
@@ -123,11 +98,6 @@ public class ControleGastoServiceTest {
 
     @Test
     void testFindById_ReturnFalse_WhenIdIsincorrect() {
-        
-        controleGastosModel.setDescrição("Teste 1");
-        controleGastosModel.setValor(20);
-        controleGastosModel.setStatus(Status.PAGA);
-        controleGastosModel.setCategoria(Categoria.Alimentação);
 
         controleGastoService.save(controleGastosModel);
 
@@ -138,11 +108,6 @@ public class ControleGastoServiceTest {
 
     @Test
     void testSave_ReturnNotNullId_WhenDespesaToSave() {
-        
-        controleGastosModel.setDescrição("Teste 1");
-        controleGastosModel.setValor(20);
-        controleGastosModel.setStatus(Status.PAGA);
-        controleGastosModel.setCategoria(Categoria.Alimentação);
 
         controleGastoService.save(controleGastosModel);
 
@@ -152,9 +117,7 @@ public class ControleGastoServiceTest {
 
     @Test
     void testSave_ReturnNull_WhenFieldIsNull(){
-        controleGastosModel.setDescrição("teste");
-        controleGastosModel.setValor(20);
-        controleGastosModel.setStatus(Status.PAGA);
+        controleGastosModel.setCategoria(null);
         
         controleGastoService.save(controleGastosModel);
 
