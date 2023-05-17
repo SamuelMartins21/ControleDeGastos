@@ -42,7 +42,7 @@ public class ControleGastoController {
         var controleDeGastosModel = new ControleDeGastosModel();
         BeanUtils.copyProperties(controleGastosDTO, controleDeGastosModel);
         controleDeGastosModel.setData(LocalDate.now());
-        return ResponseEntity.status(HttpStatus.CREATED).body(controleGastoService.save(controleDeGastosModel));
+        return ResponseEntity.ok(controleGastoService.save(controleDeGastosModel));
 
     }
 
@@ -56,7 +56,7 @@ public class ControleGastoController {
                 UUID id = gastosModel.getId();
                 gastosModel.add(linkTo(methodOn(ControleGastoController.class).getOneGasto(id)).withSelfRel());
             }
-            return ResponseEntity.status(HttpStatus.OK).body(controleDeGastosModelsList);
+            return ResponseEntity.ok(controleDeGastosModelsList);
         }
 
     }
@@ -68,7 +68,7 @@ public class ControleGastoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possivel encontrar essa despesa.");
         }
         controleDeGastosModelOptional.get().add(linkTo(methodOn(ControleGastoController.class).getAllControleGastos()).withRel("Lista de produtos:"));
-        return ResponseEntity.status(HttpStatus.OK).body(controleDeGastosModelOptional.get());
+        return ResponseEntity.ok(controleDeGastosModelOptional.get());
     }
 
     @DeleteMapping("/DeleteOneControleDeGasto/{id}")
@@ -78,7 +78,7 @@ public class ControleGastoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possivel encontrar essa despesa.");
         }
         controleGastoService.delete(controleDeGastosModeloOptional.get());
-        return ResponseEntity.status(HttpStatus.OK).body("Despesa apagada com sucesso.");
+        return ResponseEntity.ok("Despesa apagada com sucesso.");
     }
 
     @PutMapping("/PutControleDeGasto/{id}") 
@@ -91,7 +91,7 @@ public class ControleGastoController {
         BeanUtils.copyProperties(controleGastosDTO, controleDeGastosModel);
         controleDeGastosModel.setId(controleDeGastosModeloOptional.get().getId());
         controleDeGastosModel.setData(controleDeGastosModeloOptional.get().getData());
-        return ResponseEntity.status(HttpStatus.OK).body(controleGastoService.save(controleDeGastosModel));
+        return ResponseEntity.ok(controleGastoService.save(controleDeGastosModel));
     }
 
     @DeleteMapping("/deleteAll")
@@ -101,7 +101,7 @@ public class ControleGastoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possível encontrar despesas.");
         }
         controleGastoService.deleteAll(controleDeGastosModelsList);
-        return ResponseEntity.status(HttpStatus.OK).body("Todas as despesas Apagadas");
+        return ResponseEntity.ok("Todas as despesas Apagadas");
     }
     
 }
