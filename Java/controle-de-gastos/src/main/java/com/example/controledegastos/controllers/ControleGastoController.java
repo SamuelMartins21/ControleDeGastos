@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.controledegastos.Services.ControleGastoService;
@@ -30,7 +29,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @CrossOrigin (origins = "*", maxAge = 3600)
-@RequestMapping("/controledegastos")
 public class ControleGastoController {
     
     final ControleGastosRepositoryJPA controleGastosRepository;
@@ -86,7 +84,7 @@ public class ControleGastoController {
         return ResponseEntity.status(HttpStatus.OK).body("Despesa apagada com sucesso.");
     }
 
-    @PutMapping("/ControleDeGasto/{id}") 
+    @PutMapping("/PutControleDeGasto/{id}") 
     public ResponseEntity<Object> updateControleGastos(@PathVariable (value = "id")UUID id, @RequestBody @Valid ControleGastosDTO controleGastosDTO){
         var controleGastoService = new ControleGastoService(controleGastosRepository);
         Optional<ControleDeGastosModel> controleDeGastosModeloOptional = controleGastoService.findById(id);
