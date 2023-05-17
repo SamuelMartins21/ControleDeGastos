@@ -14,14 +14,14 @@ import com.example.controledegastos.repositories.ControleGastosRepositoryTest;
 
 public class ControleGastoServiceTest {
     
-    private ControleGastosRepositoryTest controleGastosRepository;
+    private ControleGastosRepositoryTest controleGastosRepositoryTest;
     private ControleGastoService controleGastoService;
     private ControleDeGastosModel controleGastosModel;
 
     @BeforeEach
     public void setUp(){
-        controleGastosRepository = new ControleGastosRepositoryTest();
-        controleGastoService = new ControleGastoService(controleGastosRepository);
+        controleGastosRepositoryTest = new ControleGastosRepositoryTest();
+        controleGastoService = new ControleGastoService(controleGastosRepositoryTest);
         controleGastosModel = new ControleDeGastosModel();
 
         controleGastosModel.setDescrição("Teste 1");

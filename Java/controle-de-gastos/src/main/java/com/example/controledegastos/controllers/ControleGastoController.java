@@ -31,14 +31,14 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @CrossOrigin (origins = "*", maxAge = 3600)
 public class ControleGastoController {
     
-    final ControleGastosRepositoryJPA controleGastosRepository;
+    private final ControleGastoService controleGastoService;
+    
     public ControleGastoController (ControleGastosRepositoryJPA controleGastosRepository){
-        this.controleGastosRepository = controleGastosRepository;
+        this.controleGastoService = new ControleGastoService(controleGastosRepository);
     }
 
     @PostMapping ("/postcontroledegastos")
     public ResponseEntity<Object> SaveControleDeGastos(@RequestBody @Valid ControleGastosDTO controleGastosDTO){
-        var controleGastoService = new ControleGastoService(controleGastosRepository);
         var controleDeGastosModel = new ControleDeGastosModel();
         BeanUtils.copyProperties(controleGastosDTO, controleDeGastosModel);
         controleDeGastosModel.setData(LocalDate.now());
@@ -48,7 +48,6 @@ public class ControleGastoController {
 
     @GetMapping("/getallcontroledegastos")
     public ResponseEntity <List<ControleDeGastosModel>> getAllControleGastos(){
-        var controleGastoService = new ControleGastoService(controleGastosRepository);
         List<ControleDeGastosModel> controleDeGastosModelsList = controleGastoService.findAll();
         if(controleDeGastosModelsList.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -64,7 +63,6 @@ public class ControleGastoController {
 
     @GetMapping("/GetOneControleDeGasto/{id}")
     public ResponseEntity<Object> getOneGasto(@PathVariable(value = "id")UUID id){
-        var controleGastoService = new ControleGastoService(controleGastosRepository);
         Optional<ControleDeGastosModel> controleDeGastosModelOptional = controleGastoService.findById(id);
         if(!controleDeGastosModelOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possivel encontrar essa despesa.");
@@ -75,7 +73,6 @@ public class ControleGastoController {
 
     @DeleteMapping("/DeleteOneControleDeGasto/{id}")
     public ResponseEntity<Object> deleteDespesa(@PathVariable(value = "id") UUID id){
-        var controleGastoService = new ControleGastoService(controleGastosRepository);
         Optional<ControleDeGastosModel> controleDeGastosModeloOptional = controleGastoService.findById(id);
         if(!controleDeGastosModeloOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possivel encontrar essa despesa.");
@@ -86,7 +83,6 @@ public class ControleGastoController {
 
     @PutMapping("/PutControleDeGasto/{id}") 
     public ResponseEntity<Object> updateControleGastos(@PathVariable (value = "id")UUID id, @RequestBody @Valid ControleGastosDTO controleGastosDTO){
-        var controleGastoService = new ControleGastoService(controleGastosRepository);
         Optional<ControleDeGastosModel> controleDeGastosModeloOptional = controleGastoService.findById(id);
         if(!controleDeGastosModeloOptional.isPresent()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possivel encontrar essa despesa.");
@@ -100,7 +96,6 @@ public class ControleGastoController {
 
     @DeleteMapping("/deleteAll")
     public ResponseEntity<Object> deleteAllGastos(){
-        var controleGastoService = new ControleGastoService(controleGastosRepository);
         List<ControleDeGastosModel> controleDeGastosModelsList = controleGastoService.findAll();
         if(controleDeGastosModelsList.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não foi possível encontrar despesas.");
