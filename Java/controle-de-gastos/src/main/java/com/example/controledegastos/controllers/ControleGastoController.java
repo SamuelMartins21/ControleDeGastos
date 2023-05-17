@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.controledegastos.Services.ControleGastoService;
@@ -29,6 +30,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @CrossOrigin (origins = "*", maxAge = 3600)
+@RequestMapping("/controledegastos")
 public class ControleGastoController {
     
     final ControleGastosRepositoryJPA controleGastosRepository;
@@ -62,7 +64,7 @@ public class ControleGastoController {
 
     }
 
-    @GetMapping("/ControleDeGasto/{id}")
+    @GetMapping("/GetOneControleDeGasto/{id}")
     public ResponseEntity<Object> getOneGasto(@PathVariable(value = "id")UUID id){
         var controleGastoService = new ControleGastoService(controleGastosRepository);
         Optional<ControleDeGastosModel> controleDeGastosModelOptional = controleGastoService.findById(id);
@@ -73,7 +75,7 @@ public class ControleGastoController {
         return ResponseEntity.status(HttpStatus.OK).body(controleDeGastosModelOptional.get());
     }
 
-    @DeleteMapping("/ControleDeGasto/{id}")
+    @DeleteMapping("/DeleteOneControleDeGasto/{id}")
     public ResponseEntity<Object> deleteDespesa(@PathVariable(value = "id") UUID id){
         var controleGastoService = new ControleGastoService(controleGastosRepository);
         Optional<ControleDeGastosModel> controleDeGastosModeloOptional = controleGastoService.findById(id);
