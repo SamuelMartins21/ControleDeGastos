@@ -1,6 +1,5 @@
 package com.example.controledegastos.models;
 
-import java.io.Serializable;
 import java.util.UUID;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -18,7 +17,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "TB_ROLE")
-public class RoleModel implements GrantedAuthority, Serializable {
+public class RoleModel implements GrantedAuthority {
     private static final long serialVersionUID = 1L;
 
     @Id

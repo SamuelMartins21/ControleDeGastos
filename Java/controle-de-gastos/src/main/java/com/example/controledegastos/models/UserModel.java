@@ -1,6 +1,5 @@
 package com.example.controledegastos.models;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -20,7 +19,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "TB_USER")
-public class UserModel implements UserDetails, Serializable {
+public class UserModel implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     @Id
