@@ -14,7 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table (name = "TB-CONTROLE-GASTOS")
+@Table (name = "TB_CONTROLE_GASTOS")
 public class ControleDeGastosModel extends RepresentationModel<ControleDeGastosModel> implements Serializable {
     private static final long serialVersionUID= 1L;
 
