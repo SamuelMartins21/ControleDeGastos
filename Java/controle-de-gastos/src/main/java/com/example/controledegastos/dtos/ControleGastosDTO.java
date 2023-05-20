@@ -1,7 +1,7 @@
 package com.example.controledegastos.dtos;
 
-import com.example.controledegastos.models.Categoria;
-import com.example.controledegastos.models.Status;
+import com.example.controledegastos.enums.Categoria;
+import com.example.controledegastos.enums.Status;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

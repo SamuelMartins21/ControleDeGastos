@@ -1,5 +1,6 @@
 package com.example.controledegastos.Services;
 
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,13 @@ public class UserDetailsService implements org.springframework.security.core.use
         UserModel userModel = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(
                         "Não foi Possível encontrar o nome de usuário: " + username));
-        return userModel;
+        return new User(userModel.getUsername(), 
+                userModel.getPassword(), 
+                userModel.isEnabled(), 
+                userModel.isAccountNonExpired(), 
+                userModel.isCredentialsNonExpired() , 
+                userModel.isAccountNonLocked(),
+                userModel.getAuthorities());
     }
 
 }
