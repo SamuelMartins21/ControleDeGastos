@@ -7,9 +7,10 @@ import java.util.UUID;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import com.example.controledegastos.models.Categoria;
+
+import com.example.controledegastos.enums.Categoria;
+import com.example.controledegastos.enums.Status;
 import com.example.controledegastos.models.ControleDeGastosModel;
-import com.example.controledegastos.models.Status;
 import com.example.controledegastos.repositories.ControleGastosRepositoryTest;
 
 public class ControleGastoServiceTest {

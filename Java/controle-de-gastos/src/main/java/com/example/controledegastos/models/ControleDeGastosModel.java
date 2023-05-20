@@ -6,6 +6,9 @@ import java.util.UUID;
 
 import org.springframework.hateoas.RepresentationModel;
 
+import com.example.controledegastos.enums.Categoria;
+import com.example.controledegastos.enums.Status;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

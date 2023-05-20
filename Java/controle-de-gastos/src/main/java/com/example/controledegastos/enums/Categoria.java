@@ -1,4 +1,4 @@
-package com.example.controledegastos.models;
+package com.example.controledegastos.enums;
 
 public enum Categoria {
     Alimentação,
