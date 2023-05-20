@@ -1,5 +1,6 @@
 package com.example.controledegastos.models;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -18,8 +19,8 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "TB-USER")
-public class UserModel implements UserDetails {
+@Table(name = "TB_USER")
+public class UserModel implements UserDetails, Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -27,12 +28,12 @@ public class UserModel implements UserDetails {
     private UUID userId;
     @Column(nullable = false, unique = true)
     private String username;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = false)
     private String password;
     @ManyToMany
-    @JoinTable(name = "TB-USER-ROLE", 
-            joinColumns = @JoinColumn(name = "user-id"), 
-            inverseJoinColumns = @JoinColumn(name = "role-id"))
+    @JoinTable(name = "TB_USER_ROLE", 
+            joinColumns = @JoinColumn(name = "user_id"), 
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<RoleModel> roles;
 
     @Override
