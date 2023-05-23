@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 import com.example.controledegastos.models.UserModel;
 import com.example.controledegastos.repositories.UserRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
     final UserRepository userRepository;
