@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,7 @@ public class ControleGastoController {
         this.controleGastoService = new ControleGastoService(controleGastosRepository);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @PostMapping ("/postcontroledegastos")
     public ResponseEntity<Object> SaveControleDeGastos(@RequestBody @Valid ControleGastosDTO controleGastosDTO){
         var controleDeGastosModel = new ControleDeGastosModel();
@@ -46,6 +48,7 @@ public class ControleGastoController {
 
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/getallcontroledegastos")
     public ResponseEntity <List<ControleDeGastosModel>> getAllControleGastos(){
         List<ControleDeGastosModel> controleDeGastosModelsList = controleGastoService.findAll();
@@ -61,6 +64,7 @@ public class ControleGastoController {
 
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/GetOneControleDeGasto/{id}")
     public ResponseEntity<Object> getOneGasto(@PathVariable(value = "id")UUID id){
         Optional<ControleDeGastosModel> controleDeGastosModelOptional = controleGastoService.findById(id);
@@ -71,6 +75,7 @@ public class ControleGastoController {
         return ResponseEntity.ok(controleDeGastosModelOptional.get());
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/DeleteOneControleDeGasto/{id}")
     public ResponseEntity<Object> deleteDespesa(@PathVariable(value = "id") UUID id){
         Optional<ControleDeGastosModel> controleDeGastosModeloOptional = controleGastoService.findById(id);
@@ -81,6 +86,7 @@ public class ControleGastoController {
         return ResponseEntity.ok("Despesa apagada com sucesso.");
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/PutControleDeGasto/{id}") 
     public ResponseEntity<Object> updateControleGastos(@PathVariable (value = "id")UUID id, @RequestBody @Valid ControleGastosDTO controleGastosDTO){
         Optional<ControleDeGastosModel> controleDeGastosModeloOptional = controleGastoService.findById(id);
@@ -94,6 +100,7 @@ public class ControleGastoController {
         return ResponseEntity.ok(controleGastoService.save(controleDeGastosModel));
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/deleteAll")
     public ResponseEntity<Object> deleteAllGastos(){
         List<ControleDeGastosModel> controleDeGastosModelsList = controleGastoService.findAll();
