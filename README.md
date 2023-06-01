@@ -57,3 +57,9 @@ Substitua {id} pelo ID da despesa que deseja atualizar. Envie os dados atualizad
 Essa rota exclui todas as despesas cadastradas no sistema.❌📋📋
 
 Certifique-se de utilizar uma ferramenta adequada, como o Postman, para realizar as requisições HTTP e interagir com as operações CRUD do projeto.
+
+## Contribuição👥
+Contribuições para o aprimoramento desta API são bem-vindas. Sinta-se à vontade para enviar pull requests e relatar problemas.
+
+## Licença📄
+Este projeto está licenciado sob a **MIT License**.
