@@ -33,9 +33,9 @@ Este projeto consiste em uma aplicação desenvolvida em Java utilizando o frame
 
 2. Clone o repositório do GitHub em seu ambiente local
 
-3.Execute a aplicação
+3. Execute a aplicação
 
-A aplicação estará disponível em ``http://localhost:8080.`` Agora você pode fazer chamadas para as operações CRUD utilizando as seguintes rotas:
+A aplicação estará disponível em ``http://localhost:8080/`` Agora você pode fazer chamadas para as operações CRUD utilizando as seguintes rotas:
 
 - Obter todas as despesas:
 **GET** ```http://localhost:8080/getallcontroledegastos```.
