@@ -9,7 +9,6 @@ Este projeto consiste em uma aplicação desenvolvida em Java utilizando o frame
 - Maven
 - Git
 - SQL (MySQL)
-- TDD (Test-Driven Development)
 - JUnit
 - Spring Security
 
