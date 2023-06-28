@@ -45,7 +45,6 @@ public class ControleGastoController {
         BeanUtils.copyProperties(controleGastosDTO, controleDeGastosModel);
         controleDeGastosModel.setData(LocalDate.now());
         return ResponseEntity.ok(controleGastoService.save(controleDeGastosModel));
-
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")

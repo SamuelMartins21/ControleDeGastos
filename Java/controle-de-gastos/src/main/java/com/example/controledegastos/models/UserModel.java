@@ -45,6 +45,10 @@ public class UserModel implements UserDetails {
         return this.password;
     }
 
+    public void setRoles(List<RoleModel> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String getUsername() {
         return this.username;
@@ -85,5 +89,5 @@ public class UserModel implements UserDetails {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
 }
