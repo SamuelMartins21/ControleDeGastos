@@ -24,7 +24,7 @@ public class RoleModel implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID roleId;
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = false)
     private Rolename rolename;
 
     @Override

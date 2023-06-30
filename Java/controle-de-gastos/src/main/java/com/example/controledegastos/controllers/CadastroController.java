@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +19,7 @@ import com.example.controledegastos.models.RoleModel;
 import com.example.controledegastos.models.UserModel;
 
 @RestController
+@Secured("permitAll")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class CadastroController {
 
@@ -28,18 +29,23 @@ public class CadastroController {
     @Autowired
     private RoleService roleService;
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @PostMapping("/saveuser")
     public ResponseEntity<Object> saveUser(@RequestBody UserModel userModel) {
         RoleModel role = new RoleModel();
         role.setRolename(Rolename.ROLE_USER);
 
-         // Salve a instância de RoleModel primeiro
+        RoleModel savedRole = roleService.save(role); 
 
         List<RoleModel> roles = new ArrayList<>();
-        roles.add(role); // Use a instância de RoleModel salva
+        roles.add(savedRole);
 
         userModel.setRoles(roles);
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String password = userModel.getPassword();
+        String hashedPassword = passwordEncoder.encode(password);
+
+        userModel.setPassword(hashedPassword);
 
         UserModel savedUser = userService.save(userModel);
 

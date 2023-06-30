@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 
 import com.example.controledegastos.enums.Categoria;
@@ -13,14 +15,14 @@ import com.example.controledegastos.enums.Status;
 import com.example.controledegastos.models.ControleDeGastosModel;
 import com.example.controledegastos.repositories.ControleGastosRepositoryTest;
 
-public class ControleGastoServiceTest {
+class ControleGastoServiceTest {
     
     private ControleGastosRepositoryTest controleGastosRepositoryTest;
     private ControleGastoService controleGastoService;
     private ControleDeGastosModel controleGastosModel;
 
     @BeforeEach
-    public void setUp(){
+    void setUp(){
         controleGastosRepositoryTest = new ControleGastosRepositoryTest();
         controleGastoService = new ControleGastoService(controleGastosRepositoryTest);
         controleGastosModel = new ControleDeGastosModel();
@@ -39,7 +41,7 @@ public class ControleGastoServiceTest {
         controleGastoService.delete(controleGastosModel);
         Optional<ControleDeGastosModel> controleDeGastosModelOptional = controleGastoService.findById(controleGastosModel.getId());
 
-        Assertions.assertTrue(controleDeGastosModelOptional.isEmpty());
+        assertTrue(controleDeGastosModelOptional.isEmpty());
         
     }
 
@@ -50,7 +52,7 @@ public class ControleGastoServiceTest {
         List<ControleDeGastosModel> controleDeGastosModelList = controleGastoService.findAll();
         controleGastoService.deleteAll(controleDeGastosModelList);
 
-        Assertions.assertTrue(controleDeGastosModelList.isEmpty());
+        assertTrue(controleDeGastosModelList.isEmpty());
     }
 
     @Test
@@ -59,7 +61,7 @@ public class ControleGastoServiceTest {
         controleGastoService.save(controleGastosModel);
         List<ControleDeGastosModel> controleDeGastosModelIsPresent = controleGastoService.findAll();
         
-        Assertions.assertTrue(controleDeGastosModelIsPresent.contains(controleGastosModel));
+        assertTrue(controleDeGastosModelIsPresent.contains(controleGastosModel));
 
     }
 
@@ -70,7 +72,7 @@ public class ControleGastoServiceTest {
         controleGastoService.delete(controleGastosModel);
         List<ControleDeGastosModel> controleDeGastosModelIsNoPresent = controleGastoService.findAll();
         
-        Assertions.assertFalse(controleDeGastosModelIsNoPresent.contains(controleGastosModel));
+        assertFalse(controleDeGastosModelIsNoPresent.contains(controleGastosModel));
 
     }
 
@@ -82,7 +84,7 @@ public class ControleGastoServiceTest {
         Optional<ControleDeGastosModel> controleDeGastosModelIdIsPresent = controleGastoService
         .findById(controleGastosModel.getId());
 
-        Assertions.assertTrue(controleDeGastosModelIdIsPresent.isPresent());
+        assertTrue(controleDeGastosModelIdIsPresent.isPresent());
 
         }
 
@@ -92,7 +94,7 @@ public class ControleGastoServiceTest {
         controleGastoService.save(controleGastosModel);
         controleGastosModel.setId(null);
 
-        Assertions.assertThrows(NullPointerException.class, () -> controleGastoService.
+        assertThrows(NullPointerException.class, () -> controleGastoService.
         findById(controleGastosModel.getId()));
 
     }
@@ -103,7 +105,7 @@ public class ControleGastoServiceTest {
         controleGastoService.save(controleGastosModel);
 
         Optional<ControleDeGastosModel> controleDeGastosModelOptional = controleGastoService.findById(UUID.randomUUID());
-        Assertions.assertFalse(controleDeGastosModelOptional.isPresent());
+        assertFalse(controleDeGastosModelOptional.isPresent());
 
     }
 
@@ -112,7 +114,7 @@ public class ControleGastoServiceTest {
 
         controleGastoService.save(controleGastosModel);
 
-        Assertions.assertNotNull(controleGastosModel.getId());
+        assertNotNull(controleGastosModel.getId());
 
     }
 
@@ -122,7 +124,7 @@ public class ControleGastoServiceTest {
         
         controleGastoService.save(controleGastosModel);
 
-        Assertions.assertEquals(null, controleGastosModel.getCategoria());
+        assertNull(controleGastosModel.getCategoria());
 
     }
 
