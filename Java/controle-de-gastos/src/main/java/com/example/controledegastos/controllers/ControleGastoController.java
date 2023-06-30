@@ -64,7 +64,7 @@ public class ControleGastoController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
-    @GetMapping("/GetOneControleDeGasto/{id}")
+    @GetMapping("/getonecontroledegasto/{id}")
     public ResponseEntity<Object> getOneGasto(@PathVariable(value = "id")UUID id){
         Optional<ControleDeGastosModel> controleDeGastosModelOptional = controleGastoService.findById(id);
         if(!controleDeGastosModelOptional.isPresent()){
@@ -75,7 +75,7 @@ public class ControleGastoController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping("/DeleteOneControleDeGasto/{id}")
+    @DeleteMapping("/deleteonecontroledegasto/{id}")
     public ResponseEntity<Object> deleteDespesa(@PathVariable(value = "id") UUID id){
         Optional<ControleDeGastosModel> controleDeGastosModeloOptional = controleGastoService.findById(id);
         if(!controleDeGastosModeloOptional.isPresent()){
@@ -86,7 +86,7 @@ public class ControleGastoController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PutMapping("/PutControleDeGasto/{id}") 
+    @PutMapping("/putcontroledegasto/{id}") 
     public ResponseEntity<Object> updateControleGastos(@PathVariable (value = "id")UUID id, @RequestBody @Valid ControleGastosDTO controleGastosDTO){
         Optional<ControleDeGastosModel> controleDeGastosModeloOptional = controleGastoService.findById(id);
         if(!controleDeGastosModeloOptional.isPresent()){
@@ -100,7 +100,7 @@ public class ControleGastoController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping("/deleteAll")
+    @DeleteMapping("/deleteall")
     public ResponseEntity<Object> deleteAllGastos(){
         List<ControleDeGastosModel> controleDeGastosModelsList = controleGastoService.findAll();
         if(controleDeGastosModelsList.isEmpty()){
