@@ -19,7 +19,6 @@ import com.example.controledegastos.models.RoleModel;
 import com.example.controledegastos.models.UserModel;
 
 @RestController
-@Secured("permitAll")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class CadastroController {
 
